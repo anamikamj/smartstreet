@@ -86,7 +86,7 @@ function DangerMap() {
       <MapContainer
         center={[userLocation.lat, userLocation.lng]}
         zoom={15}
-        style={{ height: "480px", borderRadius: "12px" }}
+        style={{ height: "500px", borderRadius: "12px" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
