@@ -39,6 +39,8 @@ import SOSEvidence from "./pages/SOSEvidence";
 import ERVideoCall from "./pages/ERVideoCall";
 import Report from "./pages/Report";
 import "./App.css";
+import EmergencyID from "./pages/EmergencyID";
+import EmergencyCard from "./pages/EmergencyCard";
 
 function App() {
   return (
@@ -50,6 +52,8 @@ function App() {
       <Route path="/sos/evidence" element={<SOSEvidence />} />
       <Route path="/sos/er" element={<ERVideoCall />} />
       <Route path="/report" element={<Report />} />
+      <Route path="/emergency-id" element={<EmergencyID />} />
+      <Route path="/emergency-card/:userId" element={<EmergencyCard />} />
     </Routes>
   );
 }
