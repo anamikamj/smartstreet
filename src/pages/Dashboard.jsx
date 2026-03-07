@@ -11,12 +11,6 @@ function Dashboard() {
 
   const dashboardFeatures = [
     {
-      icon: "👁️",
-      title: "Start Watch Me",
-      description: "Activate real-time safety monitoring and alert trusted contacts during your journey",
-      color: "#5ec4c4"
-    },
-    {
       icon: "🗺️",
       title: "Danger Map",
       description: "View and navigate around reported hazard zones in your area",
@@ -33,18 +27,6 @@ function Dashboard() {
       title: "SOS Alert",
       description: "Instantly send emergency alerts to your trusted contacts and authorities",
       color: "#ff4d6d"
-    },
-    {
-      icon: "📞",
-      title: "Emergency Call",
-      description: "Quick access to emergency services with location sharing",
-      color: "#48dbfb"
-    },
-    {
-      icon: "👥",
-      title: "Trusted Contacts",
-      description: "Manage your emergency contact list for Watch Me mode",
-      color: "#a29bfe"
     }
   ];
 

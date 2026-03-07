@@ -18,10 +18,12 @@ import "./App.css";
 
 function App() {
   const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      setLoading(false);
     });
 
     const {
@@ -33,52 +35,45 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  if (loading) {
+    return (
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        background: "#0f0f0f",
+        color: "#fff",
+        fontSize: "1rem",
+        letterSpacing: "0.05em"
+      }}>
+        Loading...
+      </div>
+    );
+  }
+
+  const ProtectedRoute = ({ element }) =>
+    session ? element : <Navigate to="/login" />;
+
   return (
     <Routes>
       {/* Public routes */}
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      
-      {/* Protected routes - require authentication */}
-      <Route
-        path="/dashboard"
-        element={session ? <Dashboard /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/danger-map"
-        element={session ? <DangerMap /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/watchme"
-        element={session ? <WatchMe /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/track/:journeyId"
-        element={session ? <TrackView /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/sos"
-        element={session ? <SOS /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/sos/evidence"
-        element={session ? <SOSEvidence /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/sos/er"
-        element={session ? <ERVideoCall /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/report"
-        element={session ? <Report /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/emergency-id"
-        element={session ? <EmergencyID /> : <Navigate to="/login" />}
-      />
-      
-      {/* Public emergency card - can be viewed without login */}
+
+      {/* Protected routes */}
+      <Route path="/dashboard"        element={<ProtectedRoute element={<Dashboard />} />} />
+      <Route path="/danger-map"       element={<ProtectedRoute element={<DangerMap />} />} />
+      <Route path="/watchme"          element={<ProtectedRoute element={<WatchMe />} />} />
+      <Route path="/track/:journeyId" element={<ProtectedRoute element={<TrackView />} />} />
+      <Route path="/sos"              element={<ProtectedRoute element={<SOS />} />} />
+      <Route path="/sos/evidence"     element={<ProtectedRoute element={<SOSEvidence />} />} />
+      <Route path="/sos/er"           element={<ProtectedRoute element={<ERVideoCall />} />} />
+      <Route path="/report"           element={<ProtectedRoute element={<Report />} />} />
+      <Route path="/emergency-id"     element={<ProtectedRoute element={<EmergencyID />} />} />
+
+      {/* Public emergency card */}
       <Route path="/emergency-card/:userId" element={<EmergencyCard />} />
     </Routes>
   );
