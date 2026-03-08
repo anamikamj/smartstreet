@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <div className="brand" onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+        <div className="brand" onClick={() => navigate("/dashboard")} style={{ cursor: "pointer" }}>
           SmartStreet
         </div>
         <ul className="nav-links">
